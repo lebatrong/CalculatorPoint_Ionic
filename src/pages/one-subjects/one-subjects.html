@@ -1,0 +1,60 @@
+<ion-header>
+	<ion-navbar color="danger">
+		<ion-buttons start>
+			<button ion-button icon-only menuToggle>
+				<ion-icon name="menu"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title>
+			Tính điểm
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-item>
+		<ion-label color="danger" text-center style="font-size: 18px;">
+			<b>TÍNH ĐIỂM MÔN HỌC</b>
+		</ion-label>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" fixed style="font-size: 16px">Điểm 10%:</ion-label>
+		<ion-input type="number" placeholder="Điểm 10%" [(ngModel)]="diem10" clearInput ></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" fixed style="font-size: 16px">Điểm 40%:</ion-label>
+		<ion-input type="number" placeholder="Điểm 40%" [(ngModel)]="diem40"  clearInput></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" fixed style="font-size: 16px">Điểm 50%:</ion-label>
+		<ion-input type="number" placeholder="Điểm 50%" [(ngModel)]="diem50" clearInput></ion-input>
+	</ion-item>
+	<br>	
+	<div class="SetButton">
+		<button ion-button icon-start color="dark" class="SetButton" (click)="onCalculator()">
+			<ion-icon name="calculator"></ion-icon>
+			Tính điểm
+		</button>
+	</div>
+
+	<ng-container *ngIf="isShowPanel">
+		<ion-card>
+		<ion-card-header color="primary">
+			Điểm của bạn <hr>
+		</ion-card-header>
+		<ion-card-content>
+				<ion-label>
+					Điểm hệ 10: <b> {{ diemhe10 }}</b> <br>
+				</ion-label>
+				<ion-label>
+					Điểm hệ 4: <b> {{ diemhe4 }}</b> <br>
+				</ion-label>
+				<ion-label>
+					Điểm chữ:
+						<span [style.color]=" diemchu=='F' ? 'red' : 'blue' "><b> {{ diemchu }}</b></span>
+				</ion-label>
+		</ion-card-content>
+	</ion-card>
+	</ng-container>
+	
+</ion-content>

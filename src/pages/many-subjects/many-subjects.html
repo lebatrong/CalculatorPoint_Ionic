@@ -1,0 +1,191 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Tính điểm nhiều môn
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+  <h4 id="TinhDiem">Tính nhiều môn</h4>
+  <ion-item>
+    <ion-label>Chỉ điểm hệ 10:</ion-label>
+    <ion-toggle [(ngModel)]="isShowDiemFull" (ionChange)="ResetAll()"></ion-toggle>
+  </ion-item>
+  <ion-list>
+    <ion-item>
+      <ion-label>Số lượng môn:</ion-label>
+      <ion-select [(ngModel)]="soluong">
+        <ion-option *ngFor="let item of maxOption" value="{{ item.values }} ">{{ item.title }}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  
+  <ion-card>
+    <ion-card-header>
+      Môn thứ {{dem}}
+    </ion-card-header>
+    <ion-card-content>
+      <ng-container *ngIf="!isShowDiemFull; else ShowDiem10">
+        <ion-item>
+          <ion-label color="primary">Điểm 10%:</ion-label>
+          <ion-input type="number" placeholder="10%" [(ngModel)]="diem10" clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">Điểm 40%:</ion-label>
+          <ion-input type="number" placeholder="40%" [(ngModel)]="diem40" clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">Điểm 50%:</ion-label>
+          <ion-input type="number" placeholder="50%" [(ngModel)]="diem50" clearInput></ion-input>
+        </ion-item>
+      </ng-container>
+
+      <ng-template #ShowDiem10>
+        <ion-item>
+          <ion-label color="primary"  floating>Điểm hệ 10: </ion-label>
+          <ion-input type="number" [(ngModel)]="DiemHe_10" clearInput ></ion-input>
+        </ion-item>
+      </ng-template>
+
+
+      <ion-item>
+        <ion-label color="primary">Số tín chỉ:</ion-label>
+        <ion-select [(ngModel)]="tinchi">
+          <ion-option value="1">1 chỉ</ion-option>
+          <ion-option value="2">2 chỉ</ion-option>
+          <ion-option value="3">3 chỉ</ion-option>
+          <ion-option value="4">4 chỉ</ion-option>
+          <ion-option value="5">5 chỉ</ion-option>
+          <ion-option value="6">6 chỉ</ion-option>
+          <ion-option value="7">7 chỉ</ion-option>
+          <ion-option value="8">8 chỉ</ion-option>
+          <ion-option value="9">9 chỉ</ion-option>
+          <ion-option value="10">10 chỉ</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-list text-center>
+        <ng-container *ngIf=" count < soluong; else blockElse">
+          <button ion-button (click)="addPointToArray()">
+            Thêm
+          </button>
+        </ng-container>
+        <ng-template #blockElse>
+          <button ion-button (click)="addPointToArray()">
+            Kết quả
+          </button>
+          
+          
+        </ng-template>
+        <button ion-button color="dark" (click)="ResetAll()">
+          Làm lại
+        </button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ng-container *ngIf="isShowDiemFull; else thongtindiem10">
+    <ng-template *ngIf="count > 0 ">
+      <ion-item>
+        <ion-title text-center>
+          Môn đã nhập
+        </ion-title>
+      </ion-item>
+    </ng-template>
+    
+
+    <!--></!-->
+    <div *ngFor="let item of arrDiem">
+      <ion-card>
+        <ion-card-header>
+          <table width="100%" >
+            <tr>
+              <td>Môn thứ {{ item.id }}</td>
+              <td style="text-align: right;">
+                <div class="editPoint" *ngIf="count ==soluong && !isEditing">
+                  <a href="#TinhDiem" (click)="EditArray(item.id,2)">edit</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="InfoPoint">
+            <table width="100%">
+              <tr>
+                <td>
+                  Điểm hệ 10: <b>{{ item.diem }}</b>
+                </td>
+                <td>
+                  <b>{{ item.tinchi }}</b> chỉ
+                </td>
+              </tr>
+            </table>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ng-container>
+
+  <ng-template #thongtindiem10>
+    <ng-template *ngIf="count > 0">
+      <ion-item>
+        <ion-title text-center>
+          Môn đã nhập
+        </ion-title>
+      </ion-item>
+    </ng-template>
+
+
+    <!--></!-->
+    <div *ngFor="let item of arrPoint">
+      <ion-card>
+        <ion-card-header>
+          <table width="100%">
+            <tr>
+              <td>Môn thứ {{ item.id }}</td>
+              <td style="text-align: right;">
+                <div class="editPoint" *ngIf="count ==soluong">
+                  <a href="#TinhDiem" (click)="EditArray(item.id,1)">edit</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="InfoPoint">
+            <table width="100%">
+              <tr>
+                <td>
+                  Điểm 10%: <b>{{ item.diem10 }} </b>
+                </td>
+                <td>
+                 Điểm 40%: <b>{{ item.diem40 }}</b>
+               </td>
+             </tr>
+             <tr>
+              <td>
+                Điểm 50%: <b>{{ item.diem50 }}</b>
+              </td>
+              <td>
+                Tín chỉ: <b>{{ item.tinchi }}</b>
+              </td>
+            </tr>
+          </table>
+
+
+
+
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ng-template>
+
+</ion-content>
