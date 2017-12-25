@@ -1,7 +1,7 @@
 {
-  "name": "Calculator",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "name": "Calculator Point",
+  "version": "1.0.1",
+  "author": "LBT",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {

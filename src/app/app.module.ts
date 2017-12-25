@@ -8,11 +8,10 @@ import { FormsModule } from '@angular/forms'
 import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
-import { HomepagePage } from '../pages/homepage/homepage';
 import { GuessPage } from '../pages/guess/guess';
 import { ManySubjectsPage } from '../pages/many-subjects/many-subjects';
 import { OneSubjectsPage } from '../pages/one-subjects/one-subjects';
-//import { MenuPage } from '../pages/menu/menu';
+
 
 
 @NgModule({
@@ -22,8 +21,7 @@ import { OneSubjectsPage } from '../pages/one-subjects/one-subjects';
     GuessPage,
     AboutPage,
     ManySubjectsPage,
-    OneSubjectsPage,
-    HomepagePage
+    OneSubjectsPage
   ],
   imports: [
     BrowserModule,
@@ -37,8 +35,7 @@ import { OneSubjectsPage } from '../pages/one-subjects/one-subjects';
     GuessPage,
     AboutPage,
     ManySubjectsPage,
-    OneSubjectsPage,
-    HomepagePage
+    OneSubjectsPage
   ],
   providers: [
     StatusBar,
